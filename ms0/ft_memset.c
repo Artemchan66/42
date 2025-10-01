@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabdull <arabdull@student.42warsaw.p      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/28 17:28:01 by arabdull          #+#    #+#             */
-/*   Updated: 2025/09/28 17:34:14 by arabdull         ###   ########.fr       */
+/*   Created: 2025/09/29 18:14:00 by arabdull          #+#    #+#             */
+/*   Updated: 2025/09/29 18:46:44 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 
-void *memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	
+	unsigned char	*b;
+
+	b = s;
+	while (n > 0)
+	{
+		*b = (unsigned char)c;
+		n--;
+		b++;
+	}
+	return (s);
 }
