@@ -1,8 +1,14 @@
 #include <stdio.h>
-#include <ctype.h>
+#include <string.h>
 
 int main()
 {
-	printf("%d", isascii(0x80));
+	char dest[100] = "Pupa";
+	char src[7] = "Zalupa";
+
+	strlcpy(dest, src, 7);
+
+	printf("%s", dest);
+
 	return 0;
 }
