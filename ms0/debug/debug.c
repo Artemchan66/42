@@ -3,6 +3,110 @@
 #include <string.h>
 #include "libft.h"
 
+void t_memcmp()
+{
+	printf("%s\n", __func__);
+	char p1[3][4] = { "Ass", "aSs", "ass"};
+	char p2[3][4] = { "Ass", "ass", "aSs"};
+	size_t p3[3] = {3, 3, 3};
+	int des_res[3] = {0, -32, 32};
+
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		int res = ft_memcmp(p1[i], p2[i], p3[i]);
+
+		printf(
+			"\tparams: %s, %s, %lu\n"
+			"\tdesired res: %d\n"
+			"\tactual res: %d\n\n",
+			p1[i], p2[i], p3[i],
+			des_res[i],
+			res
+		);
+	}
+}
+
+void t_memchr()
+{
+	printf("%s\n", __func__);
+	char p1[3][4] = { "Ass", "ass", "ssA"};
+	int p2[3] = {65, 65, 65};
+	size_t p3[3] = {3, 3, 2};
+	int offsets[3] = {0, 4, 4};
+
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		char *res = ft_memchr(p1[i], p2[i], p3[i]);
+		char *des_res = &p1[i][offsets[i]];
+
+		printf(
+			"\tparams: %s, %d(%c), %lu\n",
+			p1[i], p2[i],(char)p2[i], p3[i]
+		);
+		if (res)
+		{
+			printf(
+				"\tdesired res: %c -> %p\n"
+				"\tactual res: %c -> %p\n\n",
+				*des_res, (void *)des_res,
+				*res, (void *)des_res
+			);
+		}
+		else
+		{
+			printf(
+				"\tdesired res: %p\n"
+				"\tactual res: %p\n\n",
+				(void *)0,
+				(void *)res
+			);
+		}
+	}
+}
+
+void t_strncmp()
+{
+	printf("%s\n", __func__);
+	char p1[4][4] = { "ass", "aSs", "ass", "asS"};
+	char p2[4][4] = { "ass", "ass", "aSs", "ass" };
+	int p3[4] = {3, 3, 3, 2};
+	int des_res[4] = {0, -32, 32, 0};
+	int res;
+	
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		res = ft_strncmp(p1[i], p2[i], p3[i]);
+
+		printf(
+			"\tparams: %s, %s, %d\n"
+			"\tdesired res: %d\n"
+			"\tactual res: %d\n\n",
+			p1[i], p2[i], p3[i],
+			des_res[i],
+			res
+		);
+	}
+}
+
+void t_strlcat()
+{
+	printf("%s\n", __func__);
+	char p1[5];
+	char p2[9] = "bajojajo";
+	size_t res = ft_strlcat(p1, p2, sizeof(p1));
+
+	printf(
+		"\tparams: %lu(empty dest buff size), %s\n"
+		"\tdest value: %s\n"
+		"\tdesired res: %lu\n"
+		"\tactual res: %lu\n",
+		sizeof(p1), p2,
+		p1,
+		strlen(p1) + strlen(p2),
+		res
+	);
+}
+
 void t_strlcpy()
 {
 	printf("%s\n", __func__);
@@ -133,6 +237,10 @@ int main()
 	t_strchr();
 	t_strrchr();
 	t_strlcpy();
+	t_strlcat();
+	t_strncmp();
+	t_memchr();
+	t_memcmp();
 
 	return 0;
 }
