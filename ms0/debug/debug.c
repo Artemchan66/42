@@ -3,6 +3,72 @@
 #include <string.h>
 #include "libft.h"
 
+void t_atoi()
+{
+	printf("%s\n", __func__);
+	printf("\t%d", ft_atoi("-123"));
+	/*
+	char p1[4][4] = { "ass", "aSs", "ass", "asS"};
+	char p2[4][4] = { "ass", "ass", "aSs", "ass" };
+	int p3[4] = {3, 3, 3, 2};
+	int des_res[4] = {0, -32, 32, 0};
+	int res;
+	
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		res = ft_strncmp(p1[i], p2[i], p3[i]);
+
+		printf(
+			"\tparams: %s, %s, %d\n"
+			"\tdesired res: %d\n"
+			"\tactual res: %d\n\n",
+			p1[i], p2[i], p3[i],
+			des_res[i],
+			res
+		);
+	}
+	*/
+}
+
+void t_strnstr()
+{
+	printf("%s\n", __func__);
+	printf("\t%s", ft_strnstr("ssaAss", "Ass", 6));
+	char p1[4][7] = { "ssaAss", "ssaAss", "ssaAss", "ssaAss"};
+	char p2[4][7] = { "Ass", "sas", "Ass", ""};
+	size_t p3[4] = {6, 6, 3, 6};
+	int offsets[4] = {3, 7, 7, 0};
+
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		char *res = ft_strnstr(p1[i], p2[i], p3[i]);
+		char *des_res = &p1[i][offsets[i]];
+
+		printf(
+			"\tparams: %s, %s, %lu\n",
+			p1[i], p2[i], p3[i]
+		);
+		if (res)
+		{
+			printf(
+				"\tdesired res: %c -> %p\n"
+				"\tactual res: %c -> %p\n\n",
+				*des_res, (void *)des_res,
+				*res, (void *)res
+			);
+		}
+		else
+		{
+			printf(
+				"\tdesired res: %p\n"
+				"\tactual res: %p\n\n",
+				(void *)0,
+				(void *)res
+			);
+		}
+	}
+}
+
 void t_memcmp()
 {
 	printf("%s\n", __func__);
@@ -49,7 +115,7 @@ void t_memchr()
 				"\tdesired res: %c -> %p\n"
 				"\tactual res: %c -> %p\n\n",
 				*des_res, (void *)des_res,
-				*res, (void *)des_res
+				*res, (void *)res
 			);
 		}
 		else
@@ -241,6 +307,8 @@ int main()
 	t_strncmp();
 	t_memchr();
 	t_memcmp();
+	t_strnstr();
+	t_atoi();
 
 	return 0;
 }
