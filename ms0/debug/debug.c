@@ -3,31 +3,53 @@
 #include <string.h>
 #include "libft.h"
 
-void t_atoi()
+void t_calloc()
 {
 	printf("%s\n", __func__);
-	printf("\t%d", ft_atoi("-123"));
+	ft_calloc(1, 4);
 	/*
-	char p1[4][4] = { "ass", "aSs", "ass", "asS"};
-	char p2[4][4] = { "ass", "ass", "aSs", "ass" };
-	int p3[4] = {3, 3, 3, 2};
-	int des_res[4] = {0, -32, 32, 0};
-	int res;
+	char p1[8][10] = { " \t\n\v\f\r123", "-123", "123asd",
+		"--123", "", "asd", "+", "-"};
+	int des_res[8] = {123, -123, 123,
+		0, 0, 0, 0, 0};
 	
 	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
 	{
-		res = ft_strncmp(p1[i], p2[i], p3[i]);
+		int res = ft_atoi(p1[i]);
 
 		printf(
-			"\tparams: %s, %s, %d\n"
+			"\tparams: %s\n"
 			"\tdesired res: %d\n"
 			"\tactual res: %d\n\n",
-			p1[i], p2[i], p3[i],
+			p1[i],
 			des_res[i],
 			res
 		);
 	}
 	*/
+}
+
+void t_atoi()
+{
+	printf("%s\n", __func__);
+	char p1[8][10] = { " \t\n\v\f\r123", "-123", "123asd",
+		"--123", "", "asd", "+", "-"};
+	int des_res[8] = {123, -123, 123,
+		0, 0, 0, 0, 0};
+	
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		int res = ft_atoi(p1[i]);
+
+		printf(
+			"\tparams: %s\n"
+			"\tdesired res: %d\n"
+			"\tactual res: %d\n\n",
+			p1[i],
+			des_res[i],
+			res
+		);
+	}
 }
 
 void t_strnstr()
@@ -309,6 +331,7 @@ int main()
 	t_memcmp();
 	t_strnstr();
 	t_atoi();
+	t_calloc();
 
 	return 0;
 }

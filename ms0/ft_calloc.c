@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 07:37:26 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/15 07:06:34 by arabdull         ###   ########.fr       */
+/*   Created: 2025/10/15 07:07:18 by arabdull          #+#    #+#             */
+/*   Updated: 2025/10/15 08:52:09 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *nptr)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int	res;
-	int	sign;
+	if (size != 0 && nmemb > SIZE_MAX / size)
+		return NULL;
+	
+	size_t total_size;
 
-	res = 0;
-	sign = 1;
-	while (('\t' <= *nptr && *nptr <= '\r') || *nptr == ' ')
-		nptr++;
-	if (*nptr == '-' || *nptr == '+')
-	{
-		if (*nptr == '-')
-			sign = -1;
-		nptr++;
-	}
-	while (ft_isdigit(*nptr) == 1)
-	{
-		res = (res * 10) + (*nptr - '0');
-		nptr++;
-	}
-	return (sign * res);
+	total_size = nmemb * size;
+	void *arr = malloc(total_size);
+	
+	if (arr == NULL)
+		return NULL;
+
+	ft_memset(arr, 0, total_size);
+
+	return (arr);
 }
