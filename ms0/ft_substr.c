@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 07:07:18 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/16 07:34:43 by arabdull         ###   ########.fr       */
+/*   Created: 2025/10/16 07:40:53 by arabdull          #+#    #+#             */
+/*   Updated: 2025/10/16 07:59:37 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	total_size;
-	void	*arr;
+	char	*sub;
+	char	*ret;
 
-	if (nmemb == 0 || size == 0)
+	sub = malloc(len + 1);
+	if (sub == NULL)
 		return (NULL);
-	if (nmemb > SIZE_MAX / size)
-		return (NULL);
-	total_size = nmemb * size;
-	arr = malloc(total_size);
-	if (arr == NULL)
-		return (NULL);
-	ft_memset(arr, 0, total_size);
-	return (arr);
+	ret = sub;
+	s += start;
+	while(*s && len > 0)
+	{
+		*sub = *s;
+		sub++;
+		s++;
+		len--;
+	}
+	*sub = '\0';
+	return (ret);
 }

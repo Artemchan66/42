@@ -3,30 +3,87 @@
 #include <string.h>
 #include "libft.h"
 
+void t_substr()
+{
+	printf("%s\n", __func__);
+	char p1[2][9] = { "PupaLupa", "PupaLupa"};
+	unsigned int p2[2] = {4, 4};
+	size_t p3[2] = {4, 0};
+
+	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	{
+		char *res = ft_substr(p1[i], p2[i], p3[i]);
+
+		printf(
+			"\tparams: %s, %u, %lu\n",
+			p1[i], p2[i], p3[i]
+		);
+		if (res)
+		{
+			printf(
+				"\tdesired res: %s\n"
+				"\tactual res: %s -> %p\n\n",
+				p1[i] + p2[i],
+				res, (void *)res
+			);
+		}
+		else
+		{
+			printf(
+				"\tdesired res: NULL\n"
+				"\tactual res: NULL\n\n"
+			);
+		}
+	}
+}
+
+void t_strdup()
+{
+	printf("%s\n", __func__);
+	char p1[5] = "test";
+	char *res = ft_strdup(p1);
+	printf(
+		"\tparam: %s -> %p\n"
+		"\tdesired res: %s -> %p\n"
+		"\tactual res: %s -> %p\n\n",
+		p1, (void *)p1,
+		p1, (void *)p1,
+		res, (void *)res
+	);
+}
+
 void t_calloc()
 {
 	printf("%s\n", __func__);
-	ft_calloc(1, 4);
-	/*
-	char p1[8][10] = { " \t\n\v\f\r123", "-123", "123asd",
-		"--123", "", "asd", "+", "-"};
-	int des_res[8] = {123, -123, 123,
-		0, 0, 0, 0, 0};
-	
-	for (int i = 0; i < sizeof(p1)/sizeof(p1[0]); i++)
+	size_t p1[6] = {1,0,1,0,SIZE_MAX,1};
+	size_t p2[6] = {1,0,0,1,1,SIZE_MAX};
+	int des_res[4] = {0, 0, 0, 0};
+
+	for (int i = 0; i < sizeof(p1) / sizeof(p1[0]); i++)
 	{
-		int res = ft_atoi(p1[i]);
+		void *res = ft_calloc(p1[i], p2[i]);
 
 		printf(
-			"\tparams: %s\n"
-			"\tdesired res: %d\n"
-			"\tactual res: %d\n\n",
-			p1[i],
-			des_res[i],
-			res
+			"\tparams: %lu, %lu\n",
+			p1[i], p2[i]
 		);
+		if (res)
+		{
+			printf(
+				"\tdesired res: %d\n"
+				"\tactual res: %d -> %p\n\n",
+				des_res[i],
+				*(int *)res, res
+			);
+		}
+		else
+		{
+			printf(
+				"\tdesired res: NULL\n"
+				"\tactual res: NULL\n\n"
+			);
+		}
 	}
-	*/
 }
 
 void t_atoi()
@@ -55,7 +112,6 @@ void t_atoi()
 void t_strnstr()
 {
 	printf("%s\n", __func__);
-	printf("\t%s", ft_strnstr("ssaAss", "Ass", 6));
 	char p1[4][7] = { "ssaAss", "ssaAss", "ssaAss", "ssaAss"};
 	char p2[4][7] = { "Ass", "sas", "Ass", ""};
 	size_t p3[4] = {6, 6, 3, 6};
@@ -332,6 +388,8 @@ int main()
 	t_strnstr();
 	t_atoi();
 	t_calloc();
+	t_strdup();
+	t_substr();
 
 	return 0;
 }
