@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 07:40:53 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/17 08:24:01 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/10/17 12:01:05 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
 	char	*ret;
-
+	
+	if (!s)
+		return (NULL);
 	sub = malloc(len + 1);
 	if (sub == NULL)
 		return (NULL);
