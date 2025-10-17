@@ -6,37 +6,39 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 06:29:57 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/14 07:35:26 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/10/17 08:19:30 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	is_match(const char *big, const char *little, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (big[i] && little[i] && i < len)
+	{
+		if (big[i] != little[i])
+			return (0);
+		i++;
+	}
+	return (little[i] == '\0');
+}
+
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	l_len;
-	int	match_len;
+	size_t	l_len;
 
 	if (*little == '\0')
 		return ((char *)big);
 	l_len = ft_strlen(little);
-	match_len = 0;
-	while (len > 0 && *big != '\0')
+	while (*big && len >= l_len)
 	{
-		if (*big == *little)
-		{
-			match_len++;
-			little++;
-		}
-		else
-		{
-			little -= match_len;
-			match_len = 0;
-		}
+		if (*big == *little && is_match(big, little, len))
+			return ((char *)big);
 		big++;
 		len--;
 	}
-	if (l_len == match_len)
-		return ((char *)big - l_len);
 	return (NULL);
 }

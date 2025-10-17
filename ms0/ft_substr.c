@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 07:40:53 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/16 07:59:37 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/10/17 08:24:01 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	ret = sub;
 	s += start;
-	while(*s && len > 0)
+	while (*s && len > 0)
 	{
 		*sub = *s;
 		sub++;

@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 19:22:10 by arabdull          #+#    #+#             */
-/*   Updated: 2025/10/11 13:54:22 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/10/17 07:19:42 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (s)
+	while (*s)
 	{
-		if (*s == c)
+		if (*s == (char)c)
 			return ((char *)s);
 		s++;
 	}
-	return (0);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (NULL);
 }
