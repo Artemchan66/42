@@ -391,5 +391,8 @@ int main()
 	t_strdup();
 	t_substr();
 
+	printf("%lu\n", sizeof(char *));
+	printf("%lu", sizeof(char));
+
 	return 0;
 }

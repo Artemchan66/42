@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/16 07:40:53 by arabdull          #+#    #+#             */
-/*   Updated: 2025/11/03 12:43:22 by arabdull         ###   ########.fr       */
+/*   Created: 2025/11/03 12:45:52 by arabdull          #+#    #+#             */
+/*   Updated: 2025/11/03 12:57:29 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*sub;
-	size_t	s_len;
+	char	*res;
+	size_t	start;
+	size_t	end;
+	size_t	res_len;
 
-	if (!s)
+	start = 0;
+	while (s1[start] && ft_strchr(set, s1[start]))
+		start++;
+	end = ft_strlen(s1);
+	while (end > start && ft_strchr(set, s1[end - 1]))
+		end--;
+	res_len = end - start;
+	res = malloc(res_len + 1);
+	if (!res)
 		return (NULL);
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return (ft_strdup(""));
-	if (len > s_len - start)
-		len = s_len - start;
-	sub = malloc(len + 1);
-	if (!sub)
-		return (NULL);
-	ft_memcpy(sub, s + start, len);
-	sub[len] = '\0';
-	return (sub);
+	ft_memcpy(res, s1 + start, res_len);
+	res[res_len] = '\0';
+	return (res);
 }
