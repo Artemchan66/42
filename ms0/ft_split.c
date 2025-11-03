@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 16:11:41 by arabdull          #+#    #+#             */
-/*   Updated: 2025/11/03 16:32:21 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:12:14 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	**ft_split(char const *s, char c)
 	int		i;
 	char	**res;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	res = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!res)

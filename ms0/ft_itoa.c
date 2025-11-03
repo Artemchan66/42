@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 13:44:39 by arabdull          #+#    #+#             */
-/*   Updated: 2025/11/03 13:56:56 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/11/03 18:52:49 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_itoa(int n)
 	len = get_len(n);
 	buff = n;
 	res = (char *)malloc((len + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
 	res[len] = '\0';
 	if (buff < 0)
 		buff = -buff;

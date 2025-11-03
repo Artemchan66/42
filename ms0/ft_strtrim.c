@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/03 12:45:52 by arabdull          #+#    #+#             */
-/*   Updated: 2025/11/03 12:57:29 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:19:34 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	end;
 	size_t	res_len;
 
+	if (!s1)
+		return (NULL);
+	if (!set)
+		return (ft_strdup(s1));
 	start = 0;
 	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
