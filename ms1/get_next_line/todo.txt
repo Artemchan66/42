@@ -1,0 +1,4 @@
+1. Make sure, that every new call of a function will print new line for the same fd (static variable, that will remember the state)
+
+2. Reading file bytes stream and check for new line 
+3. In static variable put amout of buffer that was put and in other - current position in buffer where new line occured
