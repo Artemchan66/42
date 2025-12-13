@@ -2,3 +2,10 @@
 
 2. Reading file bytes stream and check for new line 
 3. In static variable put amout of buffer that was put and in other - current position in buffer where new line occured
+
+
+
+
+
+1. Reading file with buffer size until we find a new line
+2. If new line isn't here, until we hit the end of the file (number of bytes read) we print  
