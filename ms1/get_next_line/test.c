@@ -16,6 +16,7 @@ char	*get_next_line(int fd)
 	char *line;
 	static char statBuf[BUFFER_SIZE];
 
+	//reading data from file desctiptor
 	if (statBuf[0] == '\0')
 	{
 		bytes_read = read(fd, buf, BUFFER_SIZE);
@@ -32,9 +33,11 @@ char	*get_next_line(int fd)
 			w++;
 		}
 	}
-
+	
+	//allocating memory to fill data from file that we read
 	line = malloc(sizeof(char) * BUFFER_SIZE);
 
+	//populating allocated memory with data from file
 	while(buf[i] != '\n')
 	{
 		line[i] = buf[i];
@@ -65,7 +68,6 @@ char	*get_next_line(int fd)
 int	main()
 {
 	int fd = open("aboba.txt", O_RDONLY);
-
 
 	printf("%s\n", get_next_line(fd));
 	printf("%s", get_next_line(fd));
