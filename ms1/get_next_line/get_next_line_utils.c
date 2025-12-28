@@ -6,9 +6,11 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 14:35:59 by arabdull          #+#    #+#             */
-/*   Updated: 2025/12/27 14:38:44 by arabdull         ###   ########.fr       */
+/*   Updated: 2025/12/28 12:05:12 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
