@@ -17,8 +17,8 @@ fclean: clean
 re: fclean all
 
 #Debug
-dbg:
-	cc debug.c -I. -L. -lgetnextline -o dbg
+dbg: all
+	cc -g debug.c -I. -L. -lgetnextline -o dbg
 
 dclean: fclean
 	rm -f dbg libgetnextline
@@ -28,3 +28,6 @@ norm:
 
 dre: fclean dclean all dbg
 dall: all dbg
+
+ghcpy:
+	cp -fr ../ms0 ../../github/

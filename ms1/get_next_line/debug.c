@@ -4,7 +4,7 @@
 
 int	main()
 {
-	int fd = open("aboba.tx", O_RDONLY);
+	int fd = open("aboba.txt", O_RDONLY);
 	char *line = get_next_line(fd);
 	printf("%s", line);
 	free(line);
