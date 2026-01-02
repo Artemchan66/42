@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 14:26:30 by arabdull          #+#    #+#             */
-/*   Updated: 2025/12/28 20:04:24 by arabdull         ###   ########.fr       */
+/*   Updated: 2026/01/02 13:03:59 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,25 @@ static char	*read_chunk_from_file(int fd)
 		free(chunk);
 		return (NULL);
 	}
-	return chunk;
+	return (chunk);
 }
 
 static char	*populate_data_storage(int fd, char *data_storage)
 {
 	char	*tmp_data_storage;
-	char	*chunk = read_chunk_from_file(fd);
+	char	*chunk;
+
+	chunk = read_chunk_from_file(fd);
 	if (!chunk)
-		return data_storage;
+		return (data_storage);
 	if (!data_storage)
-	{
-		char *ret = ft_strdup(chunk);
-		free(chunk);
-		return (ret);
-	}
+		return (chunk);
 	tmp_data_storage = data_storage;
 	data_storage = ft_strjoin(tmp_data_storage, chunk);
 	if (!data_storage)
 	{
 		free(tmp_data_storage);
-		return NULL;
+		return (NULL);
 	}
 	free(tmp_data_storage);
 	free(chunk);
@@ -120,18 +118,15 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (!data_storage || !ft_strchr(data_storage, '\n'))
+	while (data_storage == NULL || !ft_strchr(data_storage, '\n'))
 	{
 		data_storage_before_population = data_storage;
 		data_storage = populate_data_storage(fd, data_storage);
 		if (!data_storage || data_storage == data_storage_before_population)
-			break;
+			break ;
 	}
 	if (!data_storage)
-	{
-		free(data_storage_before_population);
 		return (NULL);
-	}
 	output_line = get_output_line(data_storage, &output_line_size);
 	if (!shrink_data_storage(&data_storage, output_line_size))
 	{

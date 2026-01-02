@@ -4,14 +4,17 @@
 
 int	main()
 {
-	int fd = open("aboba.txt", O_RDONLY);
-	char *line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
+	int fd;
+	char *line;
+	char *filename;
 
-	line = get_next_line(fd);
-	printf("%s", get_next_line(fd));
-	free(line);
-
+	filename = "aboba.txt";
+	fd = open(filename, O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		printf("%s\n", line);
+		free(line);
+	}
+	close(fd);
 	return 0;
 }
