@@ -1,4 +1,4 @@
-SOURCE = ft_printf.c
+SOURCE = ft_printf.c ft_print_numeric.c
 
 OBJ = $(SOURCE:.c=.o)
 
@@ -18,7 +18,7 @@ re: fclean all
 
 #Debug
 dbg: all
-	cc -g debug.c -I. -L. -lprintf -o dbg
+	cc -g debug.c -I. -L. -lftprintf -o dbg
 
 dclean: fclean
 	rm -f dbg libprintf
