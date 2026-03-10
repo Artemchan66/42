@@ -29,6 +29,29 @@ char** push_swap(int a[])
 	return out;
 }
 
+void sort(int arr[], int n)
+{
+	int	swapped;
+	for (int i = 0; i < n - 1; i++)
+	{
+		swapped = 0;
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (arr[j] > arr[j + 1])
+			{
+				int old;
+				old = arr[j + 1];
+				arr[j + 1] = arr[j];
+				arr[j] = old;
+				swapped = 1;
+			}
+		}
+
+		if (swapped == 0)
+			break;
+	}
+}
+
 t_stack *init_stack(int capacity)
 {
 	t_stack *stack = malloc(sizeof(t_stack));
@@ -50,6 +73,21 @@ int	main(int argc, char *argv[])
 {
 	int n = argc - 1;
 
+	int *arr = malloc(sizeof(int) * n);
+	for (int i = 0; i < n; i++)
+		arr[i] = ft_atoi(argv[i + 1]);
+
+	sort(arr, n);
+
+	printf("Sorted input: ");
+	for (int i = 0; i < n; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+/*
+	for (int i = 0; i < n; i++)
+		printf("%d ", arr[i]);
+*/
+	
 	t_stack *stack_a = init_stack(n);
 	for (int i = 0; i < n; i++)
 	{
@@ -58,12 +96,33 @@ int	main(int argc, char *argv[])
 	}
 	t_stack *stack_b = init_stack(n);
 
+	printf("Unsorted input: ");
 	for (int i = 0; i < n; i++)
-		printf("%d", stack_a->data[i]);
+		printf("%d ", stack_a->data[i]);
+	printf("\n");
+
+	int *sorted_indexed_arr = malloc(sizeof(int) * n);
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (arr[j] == stack_a->data[i])
+			{
+				sorted_indexed_arr[i] = j;
+				break;
+			}
+		}
+	}
+
+	printf("Indexed input: ");
+	for (int i = 0; i < n; i++)
+		printf("%d ", sorted_indexed_arr[i]);
+	printf("\n");
+
+	
 
 	free(stack_a->data);
 	free(stack_a);
-	free(arr);
 /*
 	char **res = push_swap(a);
 
