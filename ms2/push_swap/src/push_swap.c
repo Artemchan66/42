@@ -13,6 +13,7 @@
 #include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_stack
 {
@@ -21,40 +22,112 @@ typedef struct s_stack
 	int capacity;
 } t_stack;
 
-char** push_swap(int a[])
+void pb(t_stack *a, t_stack *b)
 {
-	char **out = malloc(sizeof(char *) * 4);
-	out[0] = "kappaqqqqqqqq";
-	out[1] = NULL;
-	return out;
+	int i;
+
+	if (a->size == 0)
+		return;
+	i = b->size;
+	while (i > 0)
+	{
+		b->data[i] = b->data[i - 1];
+		i--;
+	}
+	b->data[0] = a->data[0];
+	b->size++;
+	i = 0;
+	while (i < a->size -1 )
+	{
+		a->data[i] = a->data[i + 1];
+		i++;
+	}
+	a->size--;
+	write(1, "pb\n", 3);
 }
 
-void	pa(t_stack stack, int val)
+void pa(t_stack *a, t_stack *b)
 {
+	int i;
 
+	if (b->size == 0)
+		return;
+	i = a->size;
+	while (i > 0)
+	{
+		a->data[i] = a->data[i - 1];
+		i--;
+	}
+	a->data[0] = b->data[0];
+	a->size++;
+	i = 0;
+	while (i < b->size -1 )
+	{
+		b->data[i] = b->data[i + 1];
+		i++;
+	}
+	b->size--;
+	write(1, "pa\n", 3);
+}
+
+void	ra(t_stack *a)
+{
+	int i;
+	int first;
+
+	if (a->size <= 1)
+		return;
+	first = a->data[0];
+	i = 0;
+	while (i < a->size - 1)
+	{
+		a->data[i] = a->data[i + 1];
+		i++;
+	}
+	a->data[a->size - 1] = first;
+	write(1, "ra\n", 3);
+}
+
+void	rb(t_stack *b)
+{
+	int i;
+	int first;
+
+	if (b->size <= 1)
+		return;
+	first = b->data[0];
+	i = 0;
+	while (i < b->size - 1)
+	{
+		b->data[i] = b->data[i + 1];
+		i++;
+	}
+	b->data[b->size - 1] = first;
+	write(1, "rb\n", 3);
 }
 
 //bubble sort
 void sort(int arr[], int n)
 {
-	int	swapped;
-	for (int i = 0; i < n - 1; i++)
+	int i;
+	int j;
+	int tmp;
+
+	i = 0;
+	while (i < n - 1)
 	{
-		swapped = 0;
-		for (int j = 0; j < n - i - 1; j++)
+		j = 0;
+		while (j < n - i - 1)
 		{
 			if (arr[j] > arr[j + 1])
 			{
-				int old;
-				old = arr[j + 1];
-				arr[j + 1] = arr[j];
-				arr[j] = old;
-				swapped = 1;
+				tmp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = tmp;
 			}
+			j++;
 		}
-
-		if (swapped == 0)
-			break;
+		i++;
 	}
 }
 
@@ -82,94 +155,86 @@ int	get_bit(int val, int bit_index)
 
 int	main(int argc, char *argv[])
 {
-	int n = argc - 1;
+	int n;
+	int *arr;
+	int i;
+	int j = 0;
+	int *sorted_indexed_arr;
 
-	int *arr = malloc(sizeof(int) * n);
-	for (int i = 0; i < n; i++)
+	i = 0;
+	n = argc - 1;
+	arr = malloc(sizeof(int) * n);
+	while (i < n)
+	{
 		arr[i] = ft_atoi(argv[i + 1]);
+		i++;
+	}
 
 	sort(arr, n);
 
-	printf("Sorted input: ");
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr[i]);
-	printf("\n");
-/*
-	for (int i = 0; i < n; i++)
-		printf("%d ", arr[i]);
-*/
-	
 	t_stack *stack_a = init_stack(n);
-	for (int i = 0; i < n; i++)
-	{
-		stack_a->data[i] = ft_atoi(argv[i + 1]);
-		stack_a->size++;
-	}
 	t_stack *stack_b = init_stack(n);
-
-	printf("Unsorted input: ");
-	for (int i = 0; i < n; i++)
-		printf("%d ", stack_a->data[i]);
-	printf("\n");
-
-	int *sorted_indexed_arr = malloc(sizeof(int) * n);
-	for (int i = 0; i < n; i++)
+	sorted_indexed_arr = malloc(sizeof(int) * n);
+	i = 0;
+	while (i < n)
 	{
-		for (int j = 0; j < n; j++)
+		j = 0;
+		while (j < n)
 		{
-			if (arr[j] == stack_a->data[i])
+			if (arr[j] == ft_atoi(argv[i + 1]))
 			{
 				sorted_indexed_arr[i] = j;
 				break;
 			}
+			j++;
 		}
+		i++;
 	}
-
-	printf("Indexed input: ");
-	for (int i = 0; i < n; i++)
-		printf("%d ", sorted_indexed_arr[i]);
-	printf("\n");
-
-	int a = 2;
-	int b = a << 1;
-	printf("%d\n", b);
-
-	int maxVal = 0;
-	for (int i = 0; i < n; i++)
+	
+	i = 0;
+	while (i < n)
 	{
-		if (arr[i] > maxVal)
-			maxVal = arr[i];
+		stack_a->data[i] = sorted_indexed_arr[i];
+		stack_a->size++;
+		i++;
 	}
 
-	printf("%d\n", maxVal);
-
+	int max_index = n - 1;
 	int maxBits = 0;
-	while (maxVal > 0)
-	{
-		maxVal >>= 1;
+	while ((max_index >> maxBits) != 0)
 		maxBits++;
-	}
 
-	for (int i = 0; i < maxBits; i++)
+	i = 0;
+	while (i < maxBits)
 	{
-		for (int j = 0; j < n; j++)
+		int j = 0;
+		while (j < n)
 		{
-			if (get_bit(arr[j], i))
-			{
-				
-			}
+			int num = stack_a->data[0];
+
+			if (((num >> i) & 1) == 0)
+				pb(stack_a, stack_b);
+			else
+				ra(stack_a);
+
+			j++;
 		}
+		while (stack_b->size > 0)
+			pa(stack_a, stack_b);
+		i++;
 	}
 
-	printf("%d\n", get_bit(2, 1));
+	printf("Result stack_a: \n");
+	for (int x = 0; x < n; x++)
+		printf("%d ", stack_a->data[x]);
+
+	printf("\n");
 
 	free(stack_a->data);
 	free(stack_a);
-/*
-	char **res = push_swap(a);
 
-	for (int i = 0; res[i] != NULL; i++)
-		printf("%s\n", res[i]);
-*/
 	return 0;
 }
+
+
+
