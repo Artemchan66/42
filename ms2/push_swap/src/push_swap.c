@@ -6,7 +6,7 @@
 /*   By: arabdull <arabdull@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/05 16:35:14 by arabdull          #+#    #+#             */
-/*   Updated: 2026/03/10 17:44:17 by arabdull         ###   ########.fr       */
+/*   Updated: 2026/03/12 17:29:53 by arabdull         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,25 @@ int	get_bit(int val, int bit_index)
 	return ((val >> bit_index) & 1);
 }
 
+int	is_all_numbers_valid(char *str)
+{
+	int	i = 0;
+
+	if (str[i] == '+' || str[i] == '-')
+		i++;
+
+	if (!str[i])
+		return 0;
+
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	int n;
@@ -161,15 +180,41 @@ int	main(int argc, char *argv[])
 	int j = 0;
 	int *sorted_indexed_arr;
 
-	i = 0;
 	n = argc - 1;
+	if (n == 0)
+		return 1;
+
+	if (!is_all_numbers_valid(argv[]))
+
+	i = 0;
 	arr = malloc(sizeof(int) * n);
 	while (i < n)
 	{
 		arr[i] = ft_atoi(argv[i + 1]);
+		if (ft_isdigit(arr[i]) == 0)
+		{
+			printf("Error\n: %d", arr[i]);
+			return 1;
+		}
 		i++;
 	}
-
+/*
+	i = 0;
+	while (i < n)
+	{
+		j = 0;
+		while (j < n)
+		{
+			if (arr[i] == arr[j + 1])
+			{
+				printf("Error\n");
+				return 1;
+			}
+			j++;
+		}
+		i++;
+	}
+*/
 	sort(arr, n);
 
 	t_stack *stack_a = init_stack(n);
@@ -235,6 +280,3 @@ int	main(int argc, char *argv[])
 
 	return 0;
 }
-
-
-
